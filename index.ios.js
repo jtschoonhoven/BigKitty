@@ -1,57 +1,3 @@
-// /**
-//  * Sample React Native App
-//  * https://github.com/facebook/react-native
-//  */
-// 'use strict';
-
-// var React = require('react-native');
-// var {
-//   AppRegistry,
-//   StyleSheet,
-//   Text,
-//   View,
-// } = React;
-
-// var bigkitty = React.createClass({
-//   render: function() {
-//     return (
-//       <View style={styles.container}>
-//         <Text style={styles.welcome}>
-//           Welcome to React Native!
-//         </Text>
-//         <Text style={styles.instructions}>
-//           To get started, edit index.ios.js
-//         </Text>
-//         <Text style={styles.instructions}>
-//           Press Cmd+R to reload,{'\n'}
-//           Cmd+Control+Z for dev menu
-//         </Text>
-//       </View>
-//     );
-//   }
-// });
-
-// var styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     backgroundColor: '#F5FCFF',
-//   },
-//   welcome: {
-//     fontSize: 20,
-//     textAlign: 'center',
-//     margin: 10,
-//   },
-//   instructions: {
-//     textAlign: 'center',
-//     color: '#333333',
-//     marginBottom: 5,
-//   },
-// });
-
-// AppRegistry.registerComponent('bigkitty', () => bigkitty);
-
 'use strict';
 
 var React = require('react-native');
@@ -62,6 +8,7 @@ var {
   Text,
   TextInput,
   View,
+  Component,
 } = React;
 
 var regionText = {
@@ -69,6 +16,20 @@ var regionText = {
   longitude: '0',
   latitudeDelta: '0',
   longitudeDelta: '0',
+}
+
+
+class PropertyFinderApp extends Component {
+  render() {
+    return (
+      <React.NavigatorIOS
+        style={styles.container}
+        initialRoute={{
+          title: 'Property Finder',
+          component: MapViewExample,
+        }}/>
+    );
+  }
 }
 
 var MapRegionInput = React.createClass({
@@ -200,7 +161,13 @@ var MapViewExample = React.createClass({
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
+        <Text style={styles.welcome}>
+          BigKitty
+        </Text>
+        <Text style={styles.instructions}>
+          My, what a big kitty you are!
+        </Text>
         <MapView
           style={styles.map}
           onRegionChange={this._onRegionChange}
@@ -253,6 +220,23 @@ var MapViewExample = React.createClass({
 });
 
 var styles = StyleSheet.create({
+  container: {
+    flex: 0,
+    justifyContent: 'center',
+    backgroundColor: '#F5FCFF',
+    padding: 30,
+    marginTop: 65,
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5,
+  },
   map: {
     height: 150,
     margin: 10,
@@ -279,20 +263,5 @@ var styles = StyleSheet.create({
     borderColor: '#777777',
   },
 });
-
-exports.title = '<MapView>';
-exports.description = 'Base component to display maps';
-exports.examples = [
-  {
-    title: 'Map',
-    render(): ReactElement { return <MapViewExample />; }
-  },
-  {
-    title: 'Map shows user location',
-    render() {
-      return  <MapView style={styles.map} showsUserLocation={true} />;
-    }
-  }
-];
 
 AppRegistry.registerComponent('bigkitty', () => MapViewExample);
